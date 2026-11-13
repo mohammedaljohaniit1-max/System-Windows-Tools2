@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AEGIS-X Sovereign OS Intelligence | منظومة القيادة السيادية للويندوز</title>
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <!-- Ambient Precision Cybernetic Backdrop -->
+  <div class="ambient-grid" aria-hidden="true"></div>
+  <div class="ambient-orb orb-cyan" aria-hidden="true"></div>
+  <div class="ambient-orb orb-indigo" aria-hidden="true"></div>
+
+  <!-- Critical Zero-FP Intrusion Toast Banner -->
+  <div id="threatToastContainer" class="threat-toast-container"></div>
+
+  <div class="app-shell">
+    <!-- SIDEBAR NAVIGATION -->
+    <aside class="sidebar">
+      <div class="brand-card">
+        <div class="brand-logo-wrap">
+          <img src="/assets/aegisx-logo-256.png" alt="AEGIS-X Emblem" class="brand-logo" />
+          <span class="pulse-ring"></span>
+        </div>
+        <div class="brand-text">
+          <div class="brand-title-row">
+            <h1>AEGIS-X</h1>
+            <span class="version-pill">v4.2 EXE</span>
+          </div>
+          <p>Sovereign OS Intelligence</p>
+        </div>
+      </div>
+
+      <div class="zero-load-badge">
+        <div class="zlb-dot"></div>
+        <div>
+          <strong>Zero-Overhead Kernel Mode</strong>
+          <span id="agentOverheadLabel">استهلاك الأداة: 2.1 MB | ضغط الراوتر: 0.0%</span>
+        </div>
+      </div>
+
+      <nav class="nav-menu" role="navigation">
+        <button class="nav-item active" data-tab="overview">
+          <span class="nav-icon" data-svg="command"></span>
+          <div class="nav-labels">
+            <strong>مركز القيادة الشامل</strong>
+            <small>Sovereign Telemetry</small>
+          </div>
+        </button>
+
+        <button class="nav-item" data-tab="itsupport">
+          <span class="nav-icon" data-svg="wrench"></span>
+          <div class="nav-labels">
+            <strong>الدعم الفني والتحديث الذري</strong>
+            <small>23+ Real Tools &amp; Repair</small>
+          </div>
+          <span class="nav-counter">23</span>
+        </button>
+
+        <button class="nav-item" data-tab="copilot">
+          <span class="nav-icon" data-svg="brain"></span>
+          <div class="nav-labels">
+            <strong>العقل التشخيصي العبقري</strong>
+            <small>Deterministic Root-Cause AI</small>
+          </div>
+        </button>
+
+        <button class="nav-item" data-tab="network">
+          <span class="nav-icon" data-svg="wireshark"></span>
+          <div class="nav-labels">
+            <strong>محلل الشبكة والبكت المباشر</strong>
+            <small>Wireshark / Pktmon L7</small>
+          </div>
+          <span class="nav-counter cyan" id="navPacketBadge">LIVE</span>
+        </button>
+
+        <button class="nav-item" data-tab="cyber">
+          <span class="nav-icon" data-svg="shield"></span>
+          <div class="nav-labels">
+            <strong>الأمن السيبراني 24/7 (0 خطأ)</strong>
+            <small>Zero-FP Nmap &amp; Threat IDS</small>
+          </div>
+          <span class="nav-counter emerald" id="navThreatBadge">0</span>
+        </button>
+      </nav>
+
+      <!-- Download Real Compiled Windows EXE Card -->
+      <div class="exe-download-box">
+        <div class="exe-header">
+          <img src="/assets/favicon.png" alt="EXE Icon" class="exe-mini-icon" />
+          <div>
+            <strong>نسخة الويندوز التنفيذية</strong>
+            <span>AegisX.exe (x64 Native + Icon)</span>
+          </div>
+        </div>
+        <p>ملف تنفيذي مستقل واحد بأيقونة مدمجة، يفتح تلقائياً على المتصفح بوضع التطبيق فور تشغيله.</p>
+        <a href="/api/download/exe" class="btn-exe-download" id="downloadExeBtn">
+          <span data-svg="download"></span>
+          <span>تحميل AegisX.exe + الأيقونة</span>
+        </a>
+      </div>
+    </aside>
+
+    <!-- MAIN WORKSPACE -->
+    <main class="main-stage">
+      <!-- TOP STATUS BAR -->
+      <header class="topbar">
+        <div class="topbar-host">
+          <span class="status-beacon online"></span>
+          <div>
+            <h2 id="hostTitle">جاري الاتصال بالنواة...</h2>
+            <p id="osSubtitle">Initializing Kernel Telemetry &amp; Passive Dissector...</p>
+          </div>
+        </div>
+
+        <div class="topbar-pills">
+          <div class="metric-chip">
+            <span class="chip-label">حالة الحراسة 24/7</span>
+            <strong class="chip-val emerald" id="topIdsState">ACTIVE • 0 FALSE POSITIVES</strong>
+          </div>
+          <div class="metric-chip">
+            <span class="chip-label">محرك البكت السلبي</span>
+            <strong class="chip-val cyan" id="topNetEngine">Passive Socket/ETW</strong>
+          </div>
+          <button class="btn-quick-omni" id="topOmniUpdateBtn" title="تحديث التطبيقات والويندوز والتعريفات بضغطة واحدة">
+            <span data-svg="bolt"></span>
+            <span>تحديث كل شيء الآن</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- ==================== TAB 1: OVERVIEW COMMAND DECK ==================== -->
+      <section class="tab-panel active" id="tab-overview">
+        <div class="hero-grid">
+          <!-- Sovereign Health Reactor -->
+          <div class="glass-card health-reactor-card">
+            <div class="reactor-svg-wrap">
+              <svg viewBox="0 0 220 220" class="reactor-svg">
+                <defs>
+                  <linearGradient id="healthGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#00f0ff" />
+                    <stop offset="55%" stop-color="#34ffb6" />
+                    <stop offset="100%" stop-color="#6366f1" />
+                  </linearGradient>
+                </defs>
+                <circle cx="110" cy="110" r="92" class="reactor-track" />
+                <circle cx="110" cy="110" r="78" class="reactor-orbit" />
+                <circle cx="110" cy="110" r="92" class="reactor-progress" id="healthGaugeCircle" stroke="url(#healthGrad)" stroke-dasharray="578" stroke-dashoffset="30" />
+              </svg>
+              <div class="reactor-center">
+                <span class="reactor-score" id="healthScoreNum">98</span>
+                <small id="healthGradeText">S+ OPTIMAL</small>
+              </div>
+            </div>
+            <div class="reactor-details">
+              <span class="eyebrow">مؤشر الصحة السيادية للجهاز</span>
+              <h3>تحليل حي بدون استنزاف موارد الجهاز</h3>
+              <p id="uptimeSummary">مدة التشغيل المستمر: -- | الصلاحيات: فحص فوري</p>
+              <div class="hero-action-row">
+                <button class="btn-primary-glow" onclick="window.triggerITTool('omni_self_heal')">
+                  <span data-svg="sparkles"></span>
+                  <span>الإصلاح الذاتي الذكي</span>
+                </button>
+                <button class="btn-secondary-glass" onclick="window.switchTab('copilot')">
+                  <span data-svg="brain"></span>
+                  <span>اسأل المحلل العبقري</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Real-Time Hardware Gauges -->
+          <div class="kpi-quad-grid">
+            <div class="glass-card kpi-card">
+              <div class="kpi-head">
+                <span>المعالج المركزي (CPU)</span>
+                <span class="kpi-icon cyan" data-svg="cpu"></span>
+              </div>
+              <div class="kpi-value-row">
+                <strong id="cpuPctVal">0.0%</strong>
+                <small id="cpuCoresLabel">-- Cores</small>
+              </div>
+              <div class="progress-rail"><div class="progress-fill cyan" id="cpuBar" style="width:8%"></div></div>
+              <p class="kpi-sub" id="cpuModelLabel">--</p>
+            </div>
+
+            <div class="glass-card kpi-card">
+              <div class="kpi-head">
+                <span>الذاكرة العشوائية (RAM)</span>
+                <span class="kpi-icon violet" data-svg="memory"></span>
+              </div>
+              <div class="kpi-value-row">
+                <strong id="ramPctVal">0.0%</strong>
+                <small id="ramUsedLabel">0 / 0 GB</small>
+              </div>
+              <div class="progress-rail"><div class="progress-fill violet" id="ramBar" style="width:20%"></div></div>
+              <p class="kpi-sub">إدارة Working-Set ذكية بدون قتل البرامج</p>
+            </div>
+
+            <div class="glass-card kpi-card">
+              <div class="kpi-head">
+                <span>تدفق الشبكة السلبي (Zero-Load)</span>
+                <span class="kpi-icon emerald" data-svg="wireshark"></span>
+              </div>
+              <div class="kpi-value-row">
+                <strong id="netRateVal">0.0 KB/s</strong>
+                <small id="activeFlowsVal">0 Flows</small>
+              </div>
+              <canvas id="netSparkCanvas" width="260" height="42" class="spark-canvas"></canvas>
+              <p class="kpi-sub">صفر حزم استعلام إضافية على الراوتر</p>
+            </div>
+
+            <div class="glass-card kpi-card">
+              <div class="kpi-head">
+                <span>درع الأمن السيبراني (IDS 24/7)</span>
+                <span class="kpi-icon amber" data-svg="shield"></span>
+              </div>
+              <div class="kpi-value-row">
+                <strong id="idsThreatCountVal" class="emerald-text">0 تهديد</strong>
+                <small id="idsSuppressedVal">0 Benign Ignored</small>
+              </div>
+              <div class="progress-rail"><div class="progress-fill emerald" id="idsBar" style="width:100%"></div></div>
+              <p class="kpi-sub">حماية المنافذ المحلية للـ AI من الإنذارات الكاذبة</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Storage & Top Processes Split -->
+        <div class="dual-grid">
+          <div class="glass-card">
+            <div class="section-head">
+              <div>
+                <h3>وحدات التخزين وصحة أقراص NVMe / SSD</h3>
+                <p>قراءة حقيقية للمساحات ونظام الملفات وحالة SMART</p>
+              </div>
+              <button class="btn-mini-action" onclick="window.triggerITTool('deep_junk_cleaner')">تنظيف المؤقتات الآن</button>
+            </div>
+            <div id="disksContainer" class="disks-list"></div>
+          </div>
+
+          <div class="glass-card">
+            <div class="section-head">
+              <div>
+                <h3>أعلى العمليات استهلاكاً وتصنيف الموثوقية (AI-Aware)</h3>
+                <p>يميز تلقائياً محركات الذكاء الاصطناعي المحلية ونواة النظام</p>
+              </div>
+              <button class="btn-mini-action" onclick="window.triggerITTool('ram_working_set_trim')">تحرير الرام الخامل</button>
+            </div>
+            <div class="table-scroll">
+              <table class="cyber-table">
+                <thead>
+                  <tr>
+                    <th>PID</th>
+                    <th>العملية</th>
+                    <th>التصنيف الذكي</th>
+                    <th>CPU</th>
+                    <th>الذاكرة</th>
+                  </tr>
+                </thead>
+                <tbody id="topProcsBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== TAB 2: IT SUPPORT & OMNI-UPDATE ==================== -->
+      <section class="tab-panel" id="tab-itsupport">
+        <div class="omni-banner glass-card">
+          <div class="omni-banner-info">
+            <span class="eyebrow">AUTONOMOUS IT COMMAND DECK • 23 REAL EXECUTABLE ENGINES</span>
+            <h3>ترسانة الدعم الفني الشامل وتحديث النظام والتطبيقات والتعريفات</h3>
+            <p>كل أيقونة أدناه مرتبطة بمحرك تنفيذي حقيقي (Winget, Microsoft.Update.Session COM, DISM, SFC, PnPUtil, Win32 API) مع تحليل ذكي فوري للمخرجات.</p>
+          </div>
+          <div class="omni-banner-buttons">
+            <button class="btn-primary-glow" onclick="window.triggerITTool('omni_update_everything')">
+              <span data-svg="bolt"></span>
+              <span>تحديث كل شيء (البرامج + الويندوز + التعريفات)</span>
+            </button>
+            <button class="btn-secondary-glass" onclick="window.triggerITTool('omni_self_heal')">
+              <span data-svg="sparkles"></span>
+              <span>إصلاح شامل بضغطة واحدة</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Category Filter Pills -->
+        <div class="filter-bar" id="itCategoryBar">
+          <button class="filter-pill active" data-cat="all">الكل (23 أداة)</button>
+          <button class="filter-pill" data-cat="omni">العمليات الخارقة بضغطة</button>
+          <button class="filter-pill" data-cat="updates">تحديث التطبيقات والويندوز</button>
+          <button class="filter-pill" data-cat="drivers">التعريفات والعتاد</button>
+          <button class="filter-pill" data-cat="repair">إصلاح أعطال الويندوز</button>
+          <button class="filter-pill" data-cat="storage">الأقراص وتنظيف المساحة</button>
+          <button class="filter-pill" data-cat="network">إصلاح الشبكة و DNS</button>
+          <button class="filter-pill" data-cat="performance">تسريع الرام والإقلاع</button>
+          <button class="filter-pill" data-cat="bsod">الشاشة الزرقاء والحماية</button>
+        </div>
+
+        <div class="it-layout">
+          <div class="tools-grid" id="itToolsGrid"></div>
+
+          <!-- Live Execution Console & Smart Result Analyzer -->
+          <div class="glass-card execution-console-card">
+            <div class="console-header">
+              <div class="console-dots"><span></span><span></span><span></span></div>
+              <strong>مختبر التنفيذ والتحليل الذكي للمخرجات</strong>
+              <span class="console-status" id="itExecStatusBadge">جاهز للتنفيذ</span>
+            </div>
+            <div id="itSmartInsightsBox" class="smart-insights-box">
+              <div class="insight-placeholder">
+                اضغط على أي أيقونة أداة على اليمين لتشغيلها فوراً ومشاهدة التحليل الاستدلالي لنتائج جهازك هنا.
+              </div>
+            </div>
+            <pre class="terminal-output" id="itTerminalOutput">// AEGIS-X Autonomous IT Support Output Stream
+// Ready. Click any tool card to execute natively and inspect kernel results...</pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== TAB 3: GENIUS DIAGNOSTIC COPILOT ==================== -->
+      <section class="tab-panel" id="tab-copilot">
+        <div class="glass-card copilot-hero">
+          <div class="copilot-header">
+            <div class="copilot-orb-icon" data-svg="brain"></div>
+            <div>
+              <span class="eyebrow">DETERMINISTIC CAUSAL OS INTELLIGENCE • ZERO CLOUD LATENCY</span>
+              <h3>العقل التشخيصي العبقري (يفهم شكواك ويربطها بقراءات جهازك الحية فوراً)</h3>
+              <p>اشرح أي مشكلة تواجهك باللهجة العامية أو العربية أو الإنجليزية — سيقوم المحرك بفحص المعالج، الرام، الأقراص، البورتات، وإنذارات الشبكة في نفس اللحظة واقتراح الأداة الدقيقة لتنفيذها بضغطة زر.</p>
+            </div>
+          </div>
+
+          <div class="copilot-presets">
+            <button class="preset-chip" data-q="الجهاز ثقيل وفيه تعليق واستهلاك رام عالي">الجهاز ثقيل واستهلاك الرام عالي</button>
+            <button class="preset-chip" data-q="ابغى احدث كل التطبيقات والويندوز والتعريفات الناقصة">تحديث كل البرامج والويندوز والتعريفات</button>
+            <button class="preset-chip" data-q="الانترنت بطيء في فتح المواقع وابغى فحص DNS والشبكة بدون ضغط على الراوتر">بطء التصفح ومشاكل DNS والشبكة</button>
+            <button class="preset-chip" data-q="هل جهازي يتعرض لهجوم Nmap او اختراق وهل البورتات المفتوحة آمنة؟">فحص أمني: هل يوجد هجوم أو بورتات خطيرة؟</button>
+            <button class="preset-chip" data-q="تظهر شاشة زرقاء او انهيار مفاجئ للبرامج وملفات تالفة">تحليل الشاشة الزرقاء وإصلاح ملفات النظام</button>
+            <button class="preset-chip" data-q="قرص النظام ممتلئ وابغى فحص صحة SSD وتنظيف المخلفات">امتلاء القرص وفحص عمر الـ SSD</button>
+          </div>
+
+          <form id="copilotForm" class="copilot-input-bar">
+            <input type="text" id="copilotInput" placeholder="اكتب مشكلتك هنا... مثال: الصوت يقطع والتطبيقات قديمة وابغى فحص شامل للجهاز" autocomplete="off" />
+            <button type="submit" class="btn-primary-glow">
+              <span data-svg="sparkles"></span>
+              <span>تشخيص عبقري فوري</span>
+            </button>
+          </form>
+
+          <div id="copilotReportArea" class="copilot-report-area"></div>
+        </div>
+      </section>
+
+      <!-- ==================== TAB 4: WIRESHARK-GRADE ZERO-OVERHEAD NETWORK ==================== -->
+      <section class="tab-panel" id="tab-network">
+        <div class="net-top-strip">
+          <div class="glass-card net-stat-box">
+            <span>المحرك النشط في الخلفية</span>
+            <strong id="netBackendTitle">Wireshark TShark / Pktmon ETW</strong>
+            <small class="emerald-text">Promiscuous Flood: OFF • Router DNS Spam: 0%</small>
+          </div>
+          <div class="glass-card net-stat-box">
+            <span>إجمالي الحزم المحللة</span>
+            <strong id="netTotalPackets">0</strong>
+            <small id="netTotalBytes">0 KB Inspected</small>
+          </div>
+          <div class="glass-card net-stat-box">
+            <span>الجلسات المفتوحة (Socket->PID)</span>
+            <strong id="netActiveSockets">0</strong>
+            <small>مربوطة باسم البرنامج ورقم العملية</small>
+          </div>
+          <div class="glass-card net-stat-box">
+            <span>فلتر العرض الفوري (Wireshark Filter)</span>
+            <input type="text" id="packetFilterInput" class="inline-filter-input" placeholder="فلترة: TCP, TLSv1.3, 11434, SYN, INBOUND..." />
+          </div>
+        </div>
+
+        <div class="wireshark-split">
+          <!-- Packet Stream Table -->
+          <div class="glass-card packet-stream-card">
+            <div class="section-head">
+              <div>
+                <h3>التدفق المباشر للبكت والطبقات (Live Zero-Overhead Packet Stream)</h3>
+                <p>اضغط على أي حزمة لتشريح طبقاتها (L2/L3/L4/L7) وعرض البايتات الست عشرية (Hex Inspector)</p>
+              </div>
+              <div class="stream-controls">
+                <button class="btn-mini-action" id="pauseStreamBtn">إيقاف مؤقت للعرض</button>
+              </div>
+            </div>
+            <div class="table-scroll wireshark-scroll">
+              <table class="cyber-table wireshark-table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>الوقت</th>
+                    <th>المصدر (Source)</th>
+                    <th>الوجهة (Destination)</th>
+                    <th>البروتوكول</th>
+                    <th>الطول</th>
+                    <th>الأعلام / التفاصيل</th>
+                  </tr>
+                </thead>
+                <tbody id="packetTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Deep Frame Dissector Tree + Hex View -->
+          <div class="glass-card dissector-pane">
+            <div class="section-head">
+              <div>
+                <h3>مشرح الطبقات العميق (Deep Frame Dissector)</h3>
+                <p>تفكيك البروتوكول والعملية المالكة والـ Hex Header</p>
+              </div>
+            </div>
+            <div id="frameDissectorTree" class="dissector-tree">
+              <p class="muted-hint">اختر حزمة من الجدول لعرض التشريح الكامل لطبقات الشبكة...</p>
+            </div>
+            <div class="hex-box-title">Wire Header Hexadecimal Dump</div>
+            <pre id="frameHexView" class="hex-dump">45 00 00 3C 1C 46 40 00 40 06 00 00 7F 00 00 01</pre>
+
+            <div class="section-head" style="margin-top:16px">
+              <div>
+                <h4>خريطة البورتات والبرامج النشطة (Process-to-Socket)</h4>
+              </div>
+            </div>
+            <div class="table-scroll" style="max-height:190px">
+              <table class="cyber-table compact">
+                <thead>
+                  <tr>
+                    <th>البرنامج (PID)</th>
+                    <th>المحلي</th>
+                    <th>البعيد</th>
+                    <th>التصنيف</th>
+                  </tr>
+                </thead>
+                <tbody id="flowsMiniBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== TAB 5: 24/7 ZERO-FALSE-POSITIVE CYBERSECURITY ==================== -->
+      <section class="tab-panel" id="tab-cyber">
+        <div class="cyber-hero-grid">
+          <!-- Live Animated SVG Cyber Radar -->
+          <div class="glass-card cyber-radar-card">
+            <div class="radar-visual">
+              <svg viewBox="0 0 240 240" class="cyber-radar-svg">
+                <circle cx="120" cy="120" r="102" class="radar-ring" />
+                <circle cx="120" cy="120" r="72" class="radar-ring" />
+                <circle cx="120" cy="120" r="42" class="radar-ring" />
+                <line x1="18" y1="120" x2="222" y2="120" class="radar-axis" />
+                <line x1="120" y1="18" x2="120" y2="222" class="radar-axis" />
+                <g class="radar-sweep-group">
+                  <path d="M120,120 L120,18 A102,102 0 0,1 208,69 Z" fill="url(#radarSweepGrad)" />
+                </g>
+                <defs>
+                  <radialGradient id="radarSweepGrad" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="rgba(0, 240, 255, 0.42)" />
+                    <stop offset="100%" stop-color="rgba(0, 240, 255, 0.0)" />
+                  </radialGradient>
+                </defs>
+                <circle cx="120" cy="120" r="6" fill="#34ffb6" />
+                <g id="radarThreatBlips"></g>
+              </svg>
+            </div>
+            <div class="radar-copy">
+              <span class="eyebrow">24/7 ZERO-FALSE-POSITIVE INTRUSION DETECTION ENGINE</span>
+              <h3>حارس الأمن السيبراني الدقيق (0% إيجابيات كاذبة — 0% مجاملة)</h3>
+              <p>مصمم هندسياً ليميز بدقة رياضية بين <strong>الذكاء الاصطناعي المحلي والمبرمجين</strong> (Ollama 11434, LM Studio 1234, vLLM 8000, Docker, WSL) وبين <strong>الهجمات الحقيقية</strong> مثل مسح Nmap (`-sS`, `-sT`, `-sV`, `-sX` Xmas, `Win=1024`).</p>
+
+              <div class="cyber-counters-row">
+                <div class="c-stat">
+                  <span>الحزم المفحوصة</span>
+                  <strong id="cyberEvaluatedCount">0</strong>
+                </div>
+                <div class="c-stat">
+                  <span>عمليات آمنة تم استثناؤها (AI/Dev)</span>
+                  <strong class="cyan-text" id="cyberBenignCount">0</strong>
+                </div>
+                <div class="c-stat">
+                  <span>الهجمات الحقيقية المؤكدة</span>
+                  <strong class="danger-text" id="cyberConfirmedCount">0</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Live Verification Lab (Prove Zero False Positive vs Real Nmap!) -->
+          <div class="glass-card verification-lab-card">
+            <span class="eyebrow">LIVE PROOF-OF-ACCURACY LAB • اختبر الصدق بنفسك عملياً الآن</span>
+            <h3>مختبر التحقق الحي (اختبر الفرق بين تشغيل AI محلي وهجوم Nmap حقيقي)</h3>
+            <p>اضغط الأزرار أدناه لتنفيذ حركة مرور حقيقية على السوكت الفعلي ومشاهدة دقة المحرك بدون أي مجاملة:</p>
+
+            <div class="lab-buttons">
+              <button class="btn-lab-safe" onclick="window.runCyberLab('benign_local_ai')">
+                <span data-svg="check-circle"></span>
+                <div>
+                  <strong>1. اختبار تشغيل AI محلي (Ollama Port 11434)</strong>
+                  <small>يرسل 12 جلسة استدلال حقيقية — يجب أن تكون النتيجة: 0 إنذار كاذب!</small>
+                </div>
+              </button>
+
+              <button class="btn-lab-danger" onclick="window.runCyberLab('real_nmap_scan')">
+                <span data-svg="alert-triangle"></span>
+                <div>
+                  <strong>2. تنفيذ هجوم مسح Nmap حقيقي (`nmap -sT -T4`)</strong>
+                  <small>يشغل أداة Nmap الحقيقية على المنافذ — سيكشفه المحرك فوراً ويرسل تنبيهاً!</small>
+                </div>
+              </button>
+
+              <button class="btn-lab-stealth" onclick="window.runCyberLab('stealth_xmas_syn_scan')">
+                <span data-svg="radar"></span>
+                <div>
+                  <strong>3. اختبار مسح خفي Nmap Stealth SYN + Xmas (`Win=1024`)</strong>
+                  <small>يختبر كشف البصمة الجنائية لحزم SYN نصف المفتوحة وأعلام FIN+PSH+URG</small>
+                </div>
+              </button>
+            </div>
+
+            <div id="labResultBanner" class="lab-result-banner">
+              جاهز للاختبار العملي المباشر. يمكنك أيضاً فتح الطرفية وتشغيل <code>nmap 127.0.0.1 -p 2323,4444,5901,6379</code> بنفسك!
+            </div>
+          </div>
+        </div>
+
+        <div class="dual-grid">
+          <!-- Confirmed Intrusion Alerts Feed -->
+          <div class="glass-card">
+            <div class="section-head">
+              <div>
+                <h3>سجل الهجمات المؤكدة وأمر الحظر الفوري (Confirmed Intrusion Alerts)</h3>
+                <p>لا يظهر هنا أي تنبيه إلا بعد تجاوز درجة ثقة ≥ 92% واجتياز فلاتر عدم الإزعاج</p>
+              </div>
+              <button class="btn-mini-action" onclick="window.clearCyberAlerts()">تصفير السجل</button>
+            </div>
+            <div id="cyberAlertsList" class="alerts-list"></div>
+          </div>
+
+          <!-- Zero-FP Whitelisted Local AI & Canary Sensors -->
+          <div class="glass-card">
+            <div class="section-head">
+              <div>
+                <h3>درع عدم الإزعاج (Zero-FP Immune AI/Dev Ports &amp; Canary Traps)</h3>
+                <p>الخدمات المحلية المحمية من الإنذارات الكاذبة + مصائد الاستطلاع النشطة</p>
+              </div>
+            </div>
+            <div id="canaryBadgesBox" class="canary-badges-box"></div>
+            <div class="table-scroll">
+              <table class="cyber-table">
+                <thead>
+                  <tr>
+                    <th>المنفذ</th>
+                    <th>البرنامج</th>
+                    <th>الدور الوظيفي</th>
+                    <th>سياسة المحرك</th>
+                  </tr>
+                </thead>
+                <tbody id="whitelistTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
