@@ -1,0 +1,7 @@
+# Temporary build objects
+*.o
+*.syso
+*.log
+*.etl
+*.pcapng
+/tmp_*
