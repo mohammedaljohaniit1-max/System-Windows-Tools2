@@ -5,3 +5,4 @@
 *.etl
 *.pcapng
 /tmp_*
+/dist/aegisx-linux
